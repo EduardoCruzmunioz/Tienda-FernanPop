@@ -1,0 +1,8 @@
+CLIENTE;C00002;María López;maria@mail.com;1234;true;Avenida Siempreviva 742
+CLIENTE;C00001;Juan Pérez;juan@mail.com;1234;true;Calle Falsa 123
+ADMIN;ADMIN;Admin Jefe;admin@tienda.com;1234;true
+CLIENTE;C00006;Elena Ramos;elena@mail.com;1234;true;Sevilla 99
+CLIENTE;C00005;Luis Torres;luis@mail.com;1234;true;Valencia 8
+CLIENTE;C00004;Ana Gómez;ana@mail.com;1234;true;Barcelona 45
+TRABAJADOR;T00001;Paco Logística;paco@tienda.com;1234;true
+CLIENTE;C00003;Carlos Sainz;carlos@mail.com;1234;true;Madrid 12
