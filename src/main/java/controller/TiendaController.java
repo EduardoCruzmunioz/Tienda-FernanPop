@@ -49,28 +49,44 @@ public class TiendaController {
                 Administrador.registrar("Admin Jefe", "admin@tienda.com", "1234", this.usuarios);
                 // 1 Trabajador
                 Trabajador.registrar("Paco Logística", "paco@tienda.com", "1234", this.usuarios);
-                // 2 Clientes
+                // 6 Clientes
                 Cliente.registrar("Juan Pérez", "juan@mail.com", "1234", "Calle Falsa 123", this.usuarios);
                 Cliente.registrar("María López", "maria@mail.com", "1234", "Avenida Siempreviva 742", this.usuarios);
+                Cliente.registrar("Carlos Sainz", "carlos@mail.com", "1234", "Madrid 12", this.usuarios);
+                Cliente.registrar("Ana Gómez", "ana@mail.com", "1234", "Barcelona 45", this.usuarios);
+                Cliente.registrar("Luis Torres", "luis@mail.com", "1234", "Valencia 8", this.usuarios);
+                Cliente.registrar("Elena Ramos", "elena@mail.com", "1234", "Sevilla 99", this.usuarios);
                 
-                // 6 Productos (3 Físicos, 3 Digitales)
-                String pf1 = altaProductoFisico("Teclado Mecánico", 50.0, 10, 1.2, 5.0);
-                altaProductoFisico("Ratón Gaming", 30.0, 20, 0.5, 3.0);
-                altaProductoFisico("Monitor 24 Pulgadas", 150.0, 5, 4.0, 10.0);
-                String pd1 = altaProductoDigital("Licencia Windows 11", 25.0, 99, 15.0, "PERMANENTE");
-                altaProductoDigital("Antivirus 1 Año", 15.0, 50, 5.0, "ANUAL");
-                altaProductoDigital("Curso Java Avanzado", 10.0, 100, 20.0, "PERMANENTE");
+                // 30 Productos (15 Físicos, 15 Digitales)
+                String[] nombresFisicos = {"Teclado Mecánico", "Ratón Gaming", "Monitor 24", "Silla Ergonomica", "Auriculares", "Microfono", "Webcam", "Alfombrilla", "Mando PC", "Altavoces", "Caja PC", "Fuente 750W", "Placa Base", "RAM 16GB", "SSD 1TB"};
+                java.util.List<String> idsFisicos = new java.util.ArrayList<>();
+                for(int i=0; i<15; i++) {
+                    idsFisicos.add(altaProductoFisico(nombresFisicos[i], 20.0 + i*10, 50, 1.0 + i*0.1, 5.0));
+                }
                 
-                // 1 Pedido de prueba
-                Cliente clienteTest = (Cliente) this.usuarios.values().stream().filter(u -> u.getEmail().equals("juan@mail.com")).findFirst().get();
-                Trabajador trabTest = (Trabajador) this.usuarios.values().stream().filter(u -> u instanceof Trabajador).findFirst().get();
-                java.util.Map<Producto, Integer> carroTest = new java.util.HashMap<>();
-                carroTest.put(this.inventario.get(pf1), 2);
-                carroTest.put(this.inventario.get(pd1), 1);
-                Pedido pedTest = new Pedido("PED00001", clienteTest, trabTest, carroTest, 125.0);
-                this.historialPedidos.add(pedTest);
-                clienteTest.getHistorialPedidos().add(pedTest);
-                trabTest.getPedidosAsignados().add(pedTest);
+                String[] nombresDigitales = {"Licencia Windows 11", "Antivirus 1 Año", "Curso Java", "Suscripcion Nube", "Juego RPG", "Juego FPS", "Editor Video", "Editor Foto", "VPN 1 Año", "Hosting Web", "Dominio .com", "Plantilla Web", "Libro PDF", "Curso Python", "Curso SQL"};
+                java.util.List<String> idsDigitales = new java.util.ArrayList<>();
+                for(int i=0; i<15; i++) {
+                    idsDigitales.add(altaProductoDigital(nombresDigitales[i], 10.0 + i*5, 100, 10.0, i%2==0 ? "PERMANENTE" : "ANUAL"));
+                }
+                
+                // 6 Pedidos de prueba
+                models.Cliente[] clis = this.usuarios.values().stream().filter(u -> u instanceof models.Cliente).toArray(models.Cliente[]::new);
+                models.Trabajador trabTest = (models.Trabajador) this.usuarios.values().stream().filter(u -> u instanceof models.Trabajador).findFirst().get();
+                
+                for(int i=0; i<6; i++) {
+                    java.util.Map<models.Producto, Integer> carroTest = new java.util.HashMap<>();
+                    carroTest.put(this.inventario.get(idsFisicos.get(i)), 1);
+                    carroTest.put(this.inventario.get(idsDigitales.get(i)), 2);
+                    models.Pedido pedTest = new models.Pedido(String.format("PED%05d", i+1), clis[i], trabTest, carroTest, 150.0 + i*10);
+                    // Distribuir estados para que haya variedad
+                    if (i == 0) pedTest.setEstado("ENVIADO");
+                    else if (i == 1) pedTest.setEstado("EN RECOGIDA");
+                    else if (i == 2) pedTest.setEstado("EMPAQUETANDO");
+                    this.historialPedidos.add(pedTest);
+                    clis[i].getHistorialPedidos().add(pedTest);
+                    trabTest.getPedidosAsignados().add(pedTest);
+                }
 
                 // Forzar guardado inmediato para crear los archivos físicamente
                 guardarDatos();
