@@ -2,6 +2,27 @@
 
 Plataforma de E-commerce desarrollada en Java puro, implementando una interfaz de consola con una arquitectura limpia (MVC) y enfocada en los principios de la Programación Orientada a Objetos (POO).
 
+## 📋 Requisitos Funcionales Mínimos (Cumplidos)
+
+A continuación se detalla cómo se han cubierto absolutamente todos los requisitos mínimos obligatorios de la práctica:
+
+*   ✅ **Clase abstracta Producto** con atributos privados (`id`, `nombre`, `precio`, `stock`) y sus respectivos getters/setters.
+*   ✅ **Herencia y Polimorfismo** mediante al menos dos subclases de Producto con comportamiento propio: `ProductoFisico` (peso, gastos de envío) y `ProductoDigital` (tamaño de descarga, tipo de licencia).
+*   ✅ **Clase Usuario** genérica con `id`, `nombre`, `email` y estado (`activo`/`inactivo`), aplicada a los roles.
+*   ✅ **Carrito mediante `Map<Producto, Integer>`** para almacenar producto y cantidad, integrado de manera nativa en la clase Cliente.
+*   ✅ **Clase Pedido/Factura** (compra cerrada) con fecha, usuario, líneas de producto y cálculo de total.
+*   ✅ **Impresión de factura por consola** ("Tickets" visuales y listados detallados en el flujo de compra).
+*   ✅ **Historial de pedidos** volcado en una `List<Pedido>` y persistido de manera relacional.
+*   ✅ **Estructuras de datos óptimas para IDs**: Uso intensivo de `Map<String, T>` para garantizar la unicidad e indexación de usuarios y productos sin duplicados en O(1).
+*   ✅ **Gestión de errores con Excepciones Personalizadas**: Implementadas `CredencialesInvalidasException`, `PermisoDenegadoException`, `ProductoNoEncontradoException`, `StockInsuficienteException` y `UsuarioDuplicadoException`.
+*   ✅ **Menú de Consola Obligatorio en bucle** cubriendo íntegramente las opciones exigidas:
+    *   Gestionar productos (altas, bajas, etc).
+    *   Gestionar usuarios (altas, bajas de trabajadores, registro de clientes).
+    *   Gestionar carrito (añadir, quitar, ver total).
+    *   Cerrar pedido (vuelta del carrito a Factura/Pedido y volcado al historial global y del cliente).
+    *   Consultar el historial de pedidos en el menú correspondiente.
+    *   Salir de la aplicación cerrando la ejecución.
+
 ## 🏗️ Arquitectura y Toma de Decisiones
 
 Durante el desarrollo de este proyecto, se han tomado decisiones arquitectónicas clave para asegurar que el código sea escalable, mantenible y profesional:
