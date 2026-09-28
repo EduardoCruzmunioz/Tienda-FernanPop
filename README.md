@@ -1,6 +1,6 @@
 # Tienda FernanShop 🛒
 
-Plataforma de E-commerce desarrollada en Java puro, implementando una interfaz de consola con una arquitectura limpia (MVC) y enfocada en los principios de la Programación Orientada a Objetos (POO).
+Sistema integral de punto de venta (B2C) desarrollado en Java puro. A diferencia de un modelo de compra-venta entre particulares (marketplace), esta plataforma gestiona el stock directo de un único comercio hacia el cliente final. Implementa una interfaz de consola con una arquitectura limpia (MVC) y está enfocada en los principios de la Programación Orientada a Objetos (POO).
 
 ## 📋 Requisitos Funcionales Mínimos (Cumplidos)
 
