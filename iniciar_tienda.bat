@@ -1,11 +1,6 @@
 @echo off
-TITLE Tienda FernanShop
-cls
-echo =========================================
-echo       Iniciando Tienda FernanShop
-echo =========================================
+chcp 65001 > nul
 
-java -jar out\artifacts\FernanPop_jar\FernanPop.jar
+java -Dfile.encoding=UTF-8 -jar out/artifacts/FernanPop_jar/FernanPop.jar
 
-echo.
 pause
