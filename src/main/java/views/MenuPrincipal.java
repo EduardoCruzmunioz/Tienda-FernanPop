@@ -6,7 +6,7 @@ public class MenuPrincipal {
         System.out.print("""
                 
                 ╭──────────────────────────────────────────────────╮
-                │                 TIENDA FERNANPOP                 │
+                │                TIENDA FERNANSHOP                 │
                 ├──────────────────────────────────────────────────┤
                 │          Bienvenido al sistema de gestión        │
                 ├──────────────────────────────────────────────────┤

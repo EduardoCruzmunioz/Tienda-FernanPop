@@ -1,4 +1,4 @@
-# Tienda FernanPop 🛒
+# Tienda FernanShop 🛒
 
 Plataforma de E-commerce desarrollada en Java puro, implementando una interfaz de consola con una arquitectura limpia (MVC) y enfocada en los principios de la Programación Orientada a Objetos (POO).
 
