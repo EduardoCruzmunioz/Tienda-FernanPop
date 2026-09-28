@@ -303,6 +303,38 @@ public class TiendaController {
             .sum();
     }
 
+    public String getProductoMasVendido() {
+        return historialPedidos.stream()
+            .flatMap(p -> p.getProductos().entrySet().stream())
+            .collect(java.util.stream.Collectors.groupingBy(
+                Map.Entry::getKey, 
+                java.util.stream.Collectors.summingInt(Map.Entry::getValue)
+            ))
+            .entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(e -> e.getKey().getNombre() + " (" + e.getValue() + " ventas)")
+            .orElse("Ninguno");
+    }
+
+    public double getTicketMedio() {
+        return historialPedidos.stream()
+            .mapToDouble(models.Pedido::getTotal)
+            .average()
+            .orElse(0.0);
+    }
+
+    public String getClienteConMasPedidos() {
+        return historialPedidos.stream()
+            .collect(java.util.stream.Collectors.groupingBy(
+                models.Pedido::getCliente, 
+                java.util.stream.Collectors.counting()
+            ))
+            .entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(e -> e.getKey().getNombre() + " (" + e.getValue() + " pedidos)")
+            .orElse("Ninguno");
+    }
+
     public void reasignarPedido(String idPedido, String idNuevoTrabajador) throws Exception {
         if (!(usuarioLogueado instanceof models.Administrador)) {
             throw new Exception("Solo el Administrador puede reasignar cargas de trabajo.");

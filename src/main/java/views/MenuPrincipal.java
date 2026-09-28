@@ -42,7 +42,8 @@ public class MenuPrincipal {
                 │ 6. Ver todos los pedidos                         │
                 │ 7. Reasignar carga (Pedido)                      │
                 │ 8. Modificar estado pedido                       │
-                │ 9. Cerrar sesión                                 │
+                │ 9. Ver estadísticas avanzadas                    │
+                │ 10. Cerrar sesión                                │
                 ╰──────────────────────────────────────────────────╯
                 Elige una opción: """);
     }

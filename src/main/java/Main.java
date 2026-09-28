@@ -253,6 +253,16 @@ public class Main {
                 }
                 case "9" -> {
                     Utils.limpiaPantalla();
+                    MenuPrincipal.mostrarMensaje("--- ESTADÍSTICAS AVANZADAS ---");
+                    MenuPrincipal.mostrarMensaje("Producto más vendido: %s", controller.getProductoMasVendido());
+                    MenuPrincipal.mostrarMensaje("Ticket Medio (Gasto por pedido): %.2f€", controller.getTicketMedio());
+                    MenuPrincipal.mostrarMensaje("Usuario con más pedidos: %s", controller.getClienteConMasPedidos());
+                    System.out.println("\n(Pulsa ENTER para continuar)");
+                    scanner.nextLine();
+                    Utils.limpiaPantalla();
+                }
+                case "10" -> {
+                    Utils.limpiaPantalla();
                     atras = true;
                 }
                 default -> {
