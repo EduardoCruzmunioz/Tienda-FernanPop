@@ -54,13 +54,24 @@ public class TiendaController {
                 Cliente.registrar("María López", "maria@mail.com", "1234", "Avenida Siempreviva 742", this.usuarios);
                 
                 // 6 Productos (3 Físicos, 3 Digitales)
-                altaProductoFisico("Teclado Mecánico", 50.0, 10, 1.2, 5.0);
+                String pf1 = altaProductoFisico("Teclado Mecánico", 50.0, 10, 1.2, 5.0);
                 altaProductoFisico("Ratón Gaming", 30.0, 20, 0.5, 3.0);
                 altaProductoFisico("Monitor 24 Pulgadas", 150.0, 5, 4.0, 10.0);
-                altaProductoDigital("Licencia Windows 11", 25.0, 99, 15.0, "PERMANENTE");
+                String pd1 = altaProductoDigital("Licencia Windows 11", 25.0, 99, 15.0, "PERMANENTE");
                 altaProductoDigital("Antivirus 1 Año", 15.0, 50, 5.0, "ANUAL");
                 altaProductoDigital("Curso Java Avanzado", 10.0, 100, 20.0, "PERMANENTE");
                 
+                // 1 Pedido de prueba
+                Cliente clienteTest = (Cliente) this.usuarios.values().stream().filter(u -> u.getEmail().equals("juan@mail.com")).findFirst().get();
+                Trabajador trabTest = (Trabajador) this.usuarios.values().stream().filter(u -> u instanceof Trabajador).findFirst().get();
+                java.util.Map<Producto, Integer> carroTest = new java.util.HashMap<>();
+                carroTest.put(this.inventario.get(pf1), 2);
+                carroTest.put(this.inventario.get(pd1), 1);
+                Pedido pedTest = new Pedido("PED00001", clienteTest, trabTest, carroTest, 125.0);
+                this.historialPedidos.add(pedTest);
+                clienteTest.getHistorialPedidos().add(pedTest);
+                trabTest.getPedidosAsignados().add(pedTest);
+
                 // Forzar guardado inmediato para crear los archivos físicamente
                 guardarDatos();
             } catch (Exception e) {
@@ -333,6 +344,19 @@ public class TiendaController {
             .max(Map.Entry.comparingByValue())
             .map(e -> e.getKey().getNombre() + " (" + e.getValue() + " pedidos)")
             .orElse("Ninguno");
+    }
+
+    public String exportarHistorialExcel() throws java.io.IOException {
+        String ruta = utils.Config.getInstance().getProperty("folder.data") + "/reporte_excel.csv";
+        try (java.io.BufferedWriter bw = new java.io.BufferedWriter(new java.io.FileWriter(ruta))) {
+            bw.write("ID_PEDIDO;FECHA;CLIENTE_EMAIL;TRABAJADOR;ESTADO;TOTAL_EUR\n");
+            for (models.Pedido p : historialPedidos) {
+                String asig = p.getTrabajadorAsignado() != null ? p.getTrabajadorAsignado().getEmail() : "SIN_ASIGNAR";
+                bw.write(String.format("%s;%s;%s;%s;%s;%.2f\n", 
+                    p.getId(), p.getFecha().toString(), p.getCliente().getEmail(), asig, p.getEstado(), p.getTotal()));
+            }
+        }
+        return ruta;
     }
 
     public void reasignarPedido(String idPedido, String idNuevoTrabajador) throws Exception {

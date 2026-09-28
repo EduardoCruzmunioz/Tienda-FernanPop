@@ -43,7 +43,8 @@ public class MenuPrincipal {
                 │ 7. Reasignar carga (Pedido)                      │
                 │ 8. Modificar estado pedido                       │
                 │ 9. Ver estadísticas avanzadas                    │
-                │ 10. Cerrar sesión                                │
+                │ 10. Exportar Historial a Excel (CSV)             │
+                │ 11. Cerrar sesión                                │
                 ╰──────────────────────────────────────────────────╯
                 Elige una opción: """);
     }

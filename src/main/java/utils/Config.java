@@ -31,4 +31,9 @@ public class Config {
     public String getProperty(String key) {
         return properties.getProperty(key);
     }
+
+    // Usado exclusivamente para los Tests Unitarios (inyectar rutas temporales)
+    public void setProperty(String key, String value) {
+        properties.setProperty(key, value);
+    }
 }

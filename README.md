@@ -60,7 +60,7 @@ Pese a estar en terminal, se implementó un formato estricto de recuadros de **5
 
 ## 🏆 Extra Elegido (Ampliación)
 
-De acuerdo a las opciones planteadas para subir nota, se ha decidido **implementar CUATRO extras**, priorizando la **Estadísticas Avanzadas de Tienda** y el **Sistema de Roles** como ejes funcionales principales:
+De acuerdo a las opciones planteadas para subir nota, se ha decidido **implementar CINCO extras**, convirtiendo la aplicación en un proyecto sobresaliente:
 
 1. **Estadísticas de Tienda (Streams Avanzados)**:
    *Justificación*: Se ha añadido la "Opción 9" al menú del Administrador que procesa todo el historial de pedidos en tiempo real. Utilizando exclusivamente *Java Streams API*, `flatMap`, y `Collectors.groupingBy`, la aplicación es capaz de cruzar datos relacionales complejos en una sola pasada para determinar:
@@ -69,13 +69,16 @@ De acuerdo a las opciones planteadas para subir nota, se ha decidido **implement
    - El Usuario con más actividad/pedidos registrados.
    Se ha elegido esta opción porque pone a prueba el uso avanzado de colecciones y lambdas en Java y añade gran valor analítico de negocio.
 
-2. **Sistema de Roles (Herencia)**:
+2. **Persistencia Alternativa (Exportación a Excel)**:
+   *Justificación*: Añadida "Opción 10" en el panel de Administrador para exportar el registro completo del sistema a `reporte_excel.csv`. Se ha formateado usando delimitadores estrictos para garantizar la tabulación nativa al abrirse en Microsoft Excel, otorgando una salida de datos altamente profesional para los managers.
+
+3. **Sistema de Roles (Herencia)**:
    *Justificación*: Implementado mediante la superclase `Usuario` que se subdivide en `Administrador`, `Trabajador` y `Cliente`. Permite que el sistema ofrezca distintos flujos y permisos de interfaz dependiendo de quién inicia sesión (God-Mode, Operario Logístico, o Consumidor).
 
-3. **Tests Unitarios (JUnit 5)**:
-   *Justificación*: Se ha creado una suite de pruebas para el controlador (`TiendaControllerTest`), evaluando toda la lógica de soft-booking y validaciones de carrito/asignación, demostrando solidez técnica.
+4. **Tests Unitarios (JUnit 5)**:
+   *Justificación*: Se ha creado una suite de pruebas para el controlador (`TiendaControllerTest`) y para los Gestores de Base de Datos (`GestorUsuariosTest`, `GestorProductosTest`), evaluando toda la lógica de soft-booking, asignación y persistencia de disco, demostrando solidez técnica.
 
-4. **Gestión del Proyecto con Maven**:
+5. **Gestión del Proyecto con Maven**:
    *Justificación*: Configurado `pom.xml` en la raíz que maneja correctamente el target de compilación, empaquetado y las dependencias (JUnit y Jupiter Engine) haciendo el sistema replicable y estándar.
 
 ---

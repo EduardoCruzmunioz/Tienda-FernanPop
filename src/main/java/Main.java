@@ -263,6 +263,19 @@ public class Main {
                 }
                 case "10" -> {
                     Utils.limpiaPantalla();
+                    try {
+                        String ruta = controller.exportarHistorialExcel();
+                        MenuPrincipal.mostrarMensaje("¡Historial exportado con éxito para Excel!");
+                        MenuPrincipal.mostrarMensaje("Archivo guardado en: %s", ruta);
+                    } catch (Exception e) {
+                        MenuPrincipal.mostrarMensaje("Error exportando a Excel: %s", e.getMessage());
+                    }
+                    System.out.println("\n(Pulsa ENTER para continuar)");
+                    scanner.nextLine();
+                    Utils.limpiaPantalla();
+                }
+                case "11" -> {
+                    Utils.limpiaPantalla();
                     atras = true;
                 }
                 default -> {
